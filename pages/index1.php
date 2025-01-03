@@ -74,7 +74,7 @@
         color: white;
         padding: 120px 0;
         text-align: center;
-        background-image: url('../assets/images/welcome.avif');
+        background-image: url('welcome-bg.jpg');
         background-size: cover;
         background-position: center;
         box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
@@ -110,108 +110,49 @@
         color: white;
     }
 
-    /* About Us Section */
-    .about-us {
-        background-color: #ffffff;
-        padding: 80px 0;
-        text-align: center;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    /* Carousel Styles */
+    .carousel-container {
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
     }
 
-    .about-us h2 {
-        font-size: 36px;
-        margin-bottom: 20px;
-        color: #4CAF50;
+    .carousel-slides {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
     }
 
-    .about-us p {
-        font-size: 18px;
-        margin-bottom: 30px;
+    .carousel-slide {
+        min-width: 100%;
+        box-sizing: border-box;
     }
 
-    .about-us .btn {
-        background-color: #4CAF50;
-        color: white;
-        padding: 12px 25px;
-        border-radius: 5px;
-        font-size: 18px;
+    .carousel-slide img {
+        width: 100%;
+        height: auto;
     }
 
-    .about-us .btn:hover {
-        background-color: #45a049;
-    }
-
-    /* Courses Section */
-    .courses {
-        background-color: #f9f9f9;
-        padding: 80px 0;
-        text-align: center;
-    }
-
-    .courses h2 {
-        font-size: 36px;
-        margin-bottom: 40px;
-        color: #4CAF50;
-    }
-
-    .course-list {
+    .carousel-nav {
+        position: absolute;
+        top: 50%;
+        width: 100%;
         display: flex;
         justify-content: space-between;
-        gap: 30px;
-        flex-wrap: wrap;
+        transform: translateY(-50%);
     }
 
-    .course-item {
-        background-color: #fff;
-        padding: 30px;
-        width: 30%;
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-        border-radius: 5px;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .course-item:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-    }
-
-    .course-item h3 {
-        font-size: 24px;
-        margin-bottom: 15px;
-    }
-
-    .course-item p {
-        font-size: 16px;
-    }
-
-    /* Contact Section */
-    .contact {
-        background-color: #ffffff;
-        padding: 80px 0;
-        text-align: center;
-    }
-
-    .contact h2 {
-        font-size: 36px;
-        margin-bottom: 20px;
-        color: #4CAF50;
-    }
-
-    .contact p {
-        font-size: 18px;
-        margin-bottom: 30px;
-    }
-
-    .contact .btn {
-        background-color: #4CAF50;
+    .carousel-nav button {
+        background-color: rgba(0, 0, 0, 0.5);
         color: white;
-        padding: 12px 25px;
-        border-radius: 5px;
+        border: none;
+        padding: 15px;
         font-size: 18px;
+        cursor: pointer;
     }
 
-    .contact .btn:hover {
-        background-color: #45a049;
+    .carousel-nav button:hover {
+        background-color: rgba(0, 0, 0, 0.8);
     }
 
     /* Animations */
@@ -228,11 +169,6 @@
     }
 
     @media (max-width: 768px) {
-        .course-item {
-            width: 100%;
-            margin-bottom: 20px;
-        }
-
         .welcome h1 {
             font-size: 36px;
         }
@@ -244,25 +180,36 @@
         .welcome .btn {
             font-size: 16px;
         }
-
-        mark {
-            background-color: rgba(0, 0, 255, 0.5);
-            /* Blue with 50% transparency */
-            color: black;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-weight: bold;
-        }
     }
 </style>
+
 <!-- Main Content -->
 <main>
     <!-- Welcome Section -->
     <section class="welcome">
         <div class="container">
-            <h1><mark>Welcome to Our School</mark></h1>
-            <p><mark>Providing quality education with a focus on holistic development for all students.</mark></p>
+            <h1>Welcome to Our School</h1>
+            <p>Providing quality education with a focus on holistic development for all students.</p>
             <a href="about.php" class="btn">Learn More</a>
+        </div>
+    </section>
+
+    <!-- Carousel Section -->
+    <section class="carousel-container">
+        <div class="carousel-slides">
+            <div class="carousel-slide">
+                <img src="carousel-image1.jpg" alt="Image 1">
+            </div>
+            <div class="carousel-slide">
+                <img src="carousel-image2.jpg" alt="Image 2">
+            </div>
+            <div class="carousel-slide">
+                <img src="carousel-image3.jpg" alt="Image 3">
+            </div>
+        </div>
+        <div class="carousel-nav">
+            <button class="prev">&#10094;</button>
+            <button class="next">&#10095;</button>
         </div>
     </section>
 
@@ -305,5 +252,38 @@
         </div>
     </section>
 </main>
+
+<script>
+    // Carousel functionality
+    const prevButton = document.querySelector('.prev');
+    const nextButton = document.querySelector('.next');
+    const slides = document.querySelector('.carousel-slides');
+    let currentSlide = 0;
+
+    function showSlide(index) {
+        if (index >= slides.children.length) {
+            currentSlide = 0;
+        } else if (index < 0) {
+            currentSlide = slides.children.length - 1;
+        }
+        slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+
+    prevButton.addEventListener('click', () => {
+        currentSlide--;
+        showSlide(currentSlide);
+    });
+
+    nextButton.addEventListener('click', () => {
+        currentSlide++;
+        showSlide(currentSlide);
+    });
+
+    // Automatic slide change every 5 seconds
+    setInterval(() => {
+        currentSlide++;
+        showSlide(currentSlide);
+    }, 5000);
+</script>
 
 <?php include('../includes/footer.php'); ?>

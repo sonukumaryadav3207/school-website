@@ -1,10 +1,6 @@
-<?php
-// Start of the header.php file
-
-// Include the CSS styles directly
-?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -90,17 +86,18 @@
 
         /* For small screens (mobile view) */
         @media (max-width: 768px) {
+            /* Initially hide the navigation menu */
             nav ul {
-                display: none; /* Hide the navigation by default */
+                display: none; /* Hide the menu by default */
                 flex-direction: column;
                 gap: 10px;
                 position: absolute;
                 top: 70px;
-                right: 30px;
+                right: 20px;
                 background-color: #4CAF50;
                 padding: 15px;
                 border-radius: 8px;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                width: 200px;
             }
 
             nav ul li a {
@@ -108,54 +105,59 @@
                 font-size: 18px;
             }
 
+            /* Display hamburger menu in mobile view */
             .hamburger {
                 display: flex;
             }
 
+            /* When hamburger is clicked, show the menu */
             nav.active ul {
                 display: flex;
             }
         }
     </style>
 </head>
+
 <body>
 
-<header>
-    <!-- Logo -->
-    <div class="logo">
-        B.M.B.S.T School
-    </div>
+    <header>
+        <!-- Logo -->
+        <div class="logo">
+            B.M.B.S.T School
+        </div>
 
-    <!-- Hamburger Menu -->
-    <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
+        <!-- Hamburger Menu -->
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
 
-    <!-- Navigation Bar -->
-    <nav id="nav">
-        <ul>
-            <li><a href="index.php">Home</a></li>
-            <li><a href="about.php">About</a></li>
-            <li><a href="courses.php">Courses</a></li>
-            <li><a href="contact.php">Contact</a></li>
-            <li><a href="gallery.php">Gallery</a></li>
-            <li><a href="news_event.php">News & Events</a></li>
-            <li><a href="school_member.php">Facilities</a></li>
-        </ul>
-    </nav>
-</header>
+        <!-- Navigation Bar -->
+        <nav id="nav">
+            <ul>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="news_event.php">News & Events</a></li>
+                <li><a href="school_member.php">Facilities</a></li>
+                <li><a href="gallery.php">Gallery</a></li>
+                <li><a href="courses.php">Courses</a></li>
+                <li><a href="about.php">About</a></li>
+                <li><a href="contact.php">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<script>
-    // Hamburger menu toggle script
-    const hamburger = document.getElementById('hamburger');
-    const nav = document.getElementById('nav');
+    <script>
+        // Hamburger menu toggle script
+        const hamburger = document.getElementById('hamburger');
+        const nav = document.getElementById('nav');
 
-    hamburger.addEventListener('click', () => {
-        nav.classList.toggle('active'); // Toggle the menu on and off
-    });
-</script>
+        // Toggle the navigation menu when hamburger is clicked
+        hamburger.addEventListener('click', () => {
+            nav.classList.toggle('active'); // Add or remove the 'active' class to show/hide the menu
+        });
+    </script>
 
 </body>
+
 </html>
