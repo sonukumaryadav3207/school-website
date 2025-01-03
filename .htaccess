@@ -1,0 +1,30 @@
+# Enable URL Rewriting
+RewriteEngine On
+
+# Make sure the .htaccess file is only processed if Apache supports mod_rewrite
+RewriteBase /
+
+# Clean URLs: Remove index.php from URLs
+RewriteCond %{THE_REQUEST} \s/([^/]+/)?index\.php [NC]
+RewriteRule ^(.*)index\.php$ /$1 [R=301,L]
+
+# Redirect to HTTPS (Force HTTPS if using SSL)
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Remove trailing slashes from URLs
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+# Redirect user to a custom error page (404)
+ErrorDocument 404 /error-pages/404.html
+
+# Prevent directory browsing
+Options -Indexes
+
+# Disable access to .htaccess itself
+<Files .htaccess>
+    Order Allow,Deny
+    Deny from all
+</Files>
